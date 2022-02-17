@@ -1,1 +1,248 @@
-Ghcrhchv
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <title>SNAKE GAME</title>
+        <style></style>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymoddo">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+<style></style>
+    </head>
+    <script type="text/javascript" src="./snake.js"></script>
+    <style>
+    	.pressed {
+		  transform: scale(1.1);
+		}
+		
+		#btnArea button {
+		    background: #2860c5;
+		    color: #fff;
+		    width: 86px;
+		    height: 53px;
+		    border-radius: 3px;
+    		font-size: 30px;
+    	}
+     	#btnArea {
+			text-align: center;
+		    display: flex;
+		    flex-direction: column;
+		    text-align: center;
+		    font-size: 35px;
+		    font-weight: bold;
+		   	border : 2px solid #f2f2f2;
+		   	padding: 10px;
+    	}
+    	#btnArea span:first-child{
+    	    padding: 0 0 8px 0;
+    	}
+		.container {
+			display: grid;
+			min-height: 100%;
+			align-content: center;
+			justify-content: center;
+		}
+		
+		#content{
+		    width:400px;
+		    height:400px;
+		}
+		
+		#content > div {
+			display: none;
+		}
+		#content .on{
+			display: block;
+		}
+
+		
+		#gamearea{
+		    width:400px;
+		    height:400px;
+		}
+		
+		h1 {
+		    font-size: 35px;
+		    float: left;
+		}
+    	.scorePad {
+		    float: right;
+		}
+    	.scorePad dl {
+		    border: 2px solid #f2f2f2;
+		    border-radius: 5px;
+		    display: inline-block;
+		    padding: 6px;
+		    margin: 0 1px;
+		    text-align: center;
+    	}
+    	
+    	.scorePad dl dd {
+    		font-size: 19px;
+    		padding-left: 2px;
+    	}
+    	
+    	.scorePad dl dt {
+    		padding-bottom: 5px;
+	    	font-size: 14px;
+    	}
+    	#intro{    
+    	    width: 400px;
+			height: 400px;
+    		background: rgba(0, 0, 0, 0.5);
+		    text-align: center;
+    	}
+    	#intro p { 
+    		margin: 0 auto;
+	    	padding: 40px 0;
+		    color: #fff;
+	    	font-size: 35px;
+    	}
+    	#intro button {
+		    background: #2860c5;
+		    color: #fff;
+		    height: 53px;
+		    border-radius: 3px;
+    		font-size: 30px;
+    	}
+    	
+		#snakeGamearea {
+			width: 100%;
+			height: 100%;
+			border-collapse: collapse; display: inline-block;
+		}
+		#snakeGamearea td{
+			width: 17px;
+			height: 17px;
+			background-color: #61A350;
+		}
+		#snakeGamearea tr:nth-child(even) td:nth-child(even)  { 
+			background-color: #adfb97; 
+		}
+		#snakeGamearea tr:nth-child(odd) td:nth-child(odd)  { 
+			background-color: #adfb97; 
+		}
+		td.s_t{
+		    content: '';
+			/*background:url('./snake.png');*/
+			background:url('./s_t.png');
+			background-size:cover;
+		}
+		td.s_t_e{
+			/*background:url('./snake_e.png');*/
+			background:url('./s_t_e.png');
+			background-size:cover;
+		}
+		td.s_t_e_r{
+			/*background:url('./snake_e.png');*/
+			background:url('./s_t_e_l.png');
+			background-size:cover;
+		}
+		td.s_t_e_l{
+			/*background:url('./snake_e.png');*/
+			background:url('./s_t_e_r.png');
+			background-size:cover;
+		}
+		td.s_t_e_d{
+			/*background:url('./snake_e.png');*/
+			background:url('./s_t_e_d.png');
+			background-size:cover;
+		}
+		td.s_t_e_u{
+			/*background:url('./snake_e.png');*/
+			background:url('./s_t_e_u.png');
+			background-size:cover;
+		}
+		td.s_t_i{
+			background:url('./s_t_i.png');
+			background-size:cover;
+		}
+		td.s_t_i_r{
+			background:url('./s_t_i_r.png');
+			background-size:cover;
+		}
+		td.s_t_i_l{
+			background:url('./s_t_i_l.png');
+			background-size:cover;
+		}
+		td.s_t_i_d{
+			background:url('./s_t_i_u.png');
+			background-size:cover;
+		}
+		td.s_t_i_u{
+			background:url('./s_t_i_d.png');
+			background-size:cover;
+		}
+		td.s_t{
+			font-size: 10px;
+		}
+		.apple{
+			background:url('./apple.png');
+			background-size:cover;
+		}
+		
+    </style>
+    <script type="text/javascript">
+    	window.onload = function(){
+	   		window.addEventListener("keydown", e => {
+	   			const key = document.getElementById(e.key);
+	   			if (key) { 
+	   				key.classList.add('pressed');
+	   				key.click();
+	   			}
+	       	});
+	       	window.addEventListener("keyup", e => {
+      		  	const key = document.getElementById(e.key);
+      		  	if (key) key.classList.remove('pressed');
+      		});
+	       	
+	       	//로컬 스토리지에 있는 최고점수 조회
+	   		var bestScore = localStorage.getItem("snake_best_score");
+	   		if(bestScore > 0){
+	   			document.getElementById("bestScore").innerHTML = bestScore;
+	   		}
+    	}
+    	
+    </script>
+    
+    <body>
+    
+    	<div class="container"> 
+    		<header class="header">
+    			<h1 class="title">SNAKE</h1>
+    			<div class="scorePad">
+    				<dl>
+    					<dt id="scoreType">SCORE</dt>
+    					<dd id="score">0</dd>
+    				</dl>
+    				<dl>
+    					<dt>BEST SCORE</dt>
+    					<dd id="bestScore">0</dd>
+    				</dl>
+    			</div>
+    			</span>	
+    		</header>
+    		
+			<div id="content">
+	    		<div id="intro" class="on">
+	    			<p>Arrow keys work too</p>
+					<button id="startBtn" onClick="start();">START</button>
+				</div>
+				<div id="gamearea">
+		            <table id='snakeGamearea'>
+		            </table>
+	            </div>
+	        </div>
+	        <div id="btnArea">
+		        <span>
+			        <button id="ArrowUp" onClick="moveNum(this);">▲</button>
+		        </span>
+		        <span>
+			        <button id="ArrowLeft" onClick="moveNum(this);">◀</button>
+			        <button id="ArrowDown" onClick="moveNum(this);">▼</button>
+			        <button id="ArrowRight" onClick="moveNum(this);">▶</button>
+		        </span>
+	        </div>
+        </div>
+    </body>
+</html>
